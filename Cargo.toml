@@ -11,9 +11,9 @@ keywords = ["sleep", "chrono", "cli"]
 categories = ["command-line-utilities"]
 
 [dependencies]
-chrono = "*"
-env_logger = "*"
-log = "*"
+chrono = "0.4.19"
+env_logger = "0.9.0"
+log = "0.4.16"
 
 [profile.release]
 opt-level = 3
