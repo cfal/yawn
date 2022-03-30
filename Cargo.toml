@@ -1,13 +1,13 @@
 [package]
 name = "yawn"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 description = "An alternative to sleep that allows specifying a timestamp and exit code."
 license = "MIT"
 homepage = "https://github.com/cfal/tobaru/"
 repository = "https://github.com/cfal/tobaru/"
 readme = "README.md"
-keywords = ["sleep", "chrono"]
+keywords = ["sleep", "chrono", "cli"]
 categories = ["command-line-utilities"]
 
 [dependencies]
