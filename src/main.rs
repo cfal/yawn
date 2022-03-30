@@ -104,6 +104,9 @@ fn create_config(args: &[String]) -> std::result::Result<YawnConfig, String> {
                 .map_err(|_| format!("Invalid exit code value: {}", args[i]))?;
             exit_code = Some(code);
         } else {
+            if wait_spec.is_some() {
+                return Err(format!("Too many arguments"));
+            }
             wait_spec = Some(arg.as_str().try_into()?);
         }
         i += 1;
