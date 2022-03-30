@@ -56,9 +56,13 @@ EXAMPLES:
     {} '8:00 am'
 
     Sleep until the upcoming 8 am.
+
+    {} '2022-04-01T00:00:00Z'
+
+    Sleep until midnight of April 1st, 2022 UTC.
 ";
 
-    HELP_STR.replace("{}", &command)
+    HELP_STR.replace("{}", command)
 }
 
 fn main() {
@@ -71,8 +75,8 @@ fn main() {
         Ok(c) => c,
         Err(e) => {
             eprintln!("ERROR: {}", e);
-            eprintln!("");
-            eprintln!("{}", help_str(&command));
+            eprintln!();
+            eprintln!("{}", help_str(command));
             std::process::exit(1);
         }
     };
@@ -119,7 +123,7 @@ fn run_wait_spec(wait_spec: WaitSpec) {
     let duration = match wait_spec {
         WaitSpec::Duration(d) => d,
         WaitSpec::DateTime(dt) => dt.to_duration(),
-        WaitSpec::NaiveTime(nt) => nt.to_duration()
+        WaitSpec::NaiveTime(nt) => nt.to_duration(),
     };
     std::thread::sleep(duration);
 }

@@ -7,7 +7,7 @@ use chrono::{DateTime, Local, NaiveTime, TimeZone};
 pub enum WaitSpec {
     Duration(Duration),
     DateTime(DateTime<Local>),
-    NaiveTime(NaiveTime)
+    NaiveTime(NaiveTime),
 }
 
 impl TryFrom<&str> for WaitSpec {
@@ -36,10 +36,7 @@ impl TryFrom<&str> for WaitSpec {
         for fmt in LOCAL_DATETIME_FORMATS {
             if let Ok(dt) = Local.datetime_from_str(value, fmt) {
                 if dt < Local::now() {
-                    return Err(format!(
-                        "Date string ({}) is in the past: {}",
-                        fmt, dt
-                    ));
+                    return Err(format!("Date string ({}) is in the past: {}", fmt, dt));
                 }
 
                 return Ok(WaitSpec::DateTime(dt));
@@ -62,7 +59,7 @@ impl Display for WaitSpec {
         match self {
             Duration(d) => write!(f, "duration ({}s)", d.as_secs()),
             DateTime(dt) => write!(f, "exact date/time ({})", dt),
-            NaiveTime(nt) => write!(f, "time ({})", nt)
+            NaiveTime(nt) => write!(f, "time ({})", nt),
         }
     }
 }
@@ -143,7 +140,7 @@ fn parse_duration_str_with_units(value: &str) -> std::result::Result<Duration, &
                 }
             }
             b's' => {
-                duration = duration * 1000;
+                duration *= 1000;
                 Seconds
             }
             _ => {
